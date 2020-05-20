@@ -99,7 +99,9 @@ entity a7_gtp_wrapper is
     gt0_txusrclk_o            : out   std_logic;
     gt1_txusrclk_o            : out   std_logic;
     gt2_txusrclk_o            : out   std_logic;
-    gt3_txusrclk_o            : out   std_logic
+    gt3_txusrclk_o            : out   std_logic;
+    
+    prbs_sel_i                : in    std_logic_vector(2 downto 0)
   );
 
 end a7_gtp_wrapper;
@@ -154,8 +156,10 @@ begin
     DONT_RESET_ON_DATA_ERROR_IN => '0',
     Q0_CLK0_GTREFCLK_PAD_N_IN   => refclk_in_n(0),
     Q0_CLK0_GTREFCLK_PAD_P_IN   => refclk_in_p(0),
-  --Q0_CLK1_GTREFCLK_PAD_N_IN   => refclk_in_n(1),
-  --Q0_CLK1_GTREFCLK_PAD_P_IN   => refclk_in_p(1),
+--    Q0_CLK0_GTREFCLK_PAD_N_IN   => '0',
+--    Q0_CLK0_GTREFCLK_PAD_P_IN   => '1',
+--  Q0_CLK1_GTREFCLK_PAD_N_IN   => refclk_in_n(1),
+--  Q0_CLK1_GTREFCLK_PAD_P_IN   => refclk_in_p(1),
     GT0_TX_FSM_RESET_DONE_OUT   => tx_fsm_reset_done(0),
     GT0_RX_FSM_RESET_DONE_OUT   => open,
     GT0_DATA_VALID_IN           => '0',
@@ -216,6 +220,9 @@ begin
     gt0_txoutclkpcs_out             =>      open,
     ------------- Transmit Ports - TX Initialization and Reset Ports -----------
     gt0_txresetdone_out             =>      open,
+    ----- PRBS ----
+    gt0_txprbssel_in                =>      prbs_sel_i,
+    gt0_txprbsforceerr_in           =>      '0',
 
 
     --_____________________________________________________________________
@@ -255,6 +262,9 @@ begin
     gt1_txoutclkpcs_out             =>      open,
     ------------- Transmit Ports - TX Initialization and Reset Ports -----------
     gt1_txresetdone_out             =>      open,
+    ----- PRBS ----
+    gt1_txprbssel_in                =>      prbs_sel_i,
+    gt1_txprbsforceerr_in           =>      '0',
 
 
     --_____________________________________________________________________
@@ -294,6 +304,9 @@ begin
     gt2_txoutclkpcs_out             =>      open,
     ------------- Transmit Ports - TX Initialization and Reset Ports -----------
     gt2_txresetdone_out             =>      open,
+    ----- PRBS ----
+    gt2_txprbssel_in                =>      prbs_sel_i,
+    gt2_txprbsforceerr_in           =>      '0',
 
 
     --_____________________________________________________________________
@@ -333,6 +346,9 @@ begin
     gt3_txoutclkpcs_out             =>      open,
     ------------- Transmit Ports - TX Initialization and Reset Ports -----------
     gt3_txresetdone_out             =>      open,
+    ----- PRBS ----
+    gt3_txprbssel_in                =>      prbs_sel_i,
+    gt3_txprbsforceerr_in           =>      '0',
 
     GT0_DRPADDR_COMMON_IN => "00000000",
     GT0_DRPDI_COMMON_IN   => "0000000000000000",

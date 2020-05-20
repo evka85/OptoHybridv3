@@ -314,7 +314,9 @@ module   gem_data_out #(
         .gt0_txusrclk_o            (usrclk_160),
         .gt1_txusrclk_o            (),
         .gt2_txusrclk_o            (),
-        .gt3_txusrclk_o            ()
+        .gt3_txusrclk_o            (),
+        
+        .prbs_sel_i                (tx_prbs_mode)
       );
   end
   endgenerate

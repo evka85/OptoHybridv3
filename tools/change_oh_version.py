@@ -13,7 +13,8 @@ def main():
 
     if (len(sys.argv) < 6):
         print('Arguments: <gem_station> <oh_version> <geb_version> <geb_length> <firmware_version> [<date>]')
-        print('e.g.: sh update_oh_firmware.sh ge21 v3c v3c short 03.02.04 20190728')
+        print('e.g.: sh update_oh_firmware.sh ge11 v3c v3c short 03.02.04 2019.07.28')
+        print('e.g.: sh update_oh_firmware.sh ge21 v2 v3c short 03.02.08 2020.04.15')
         sys.exit(1)
     else:
         print('%d arguments received'%len(sys.argv))

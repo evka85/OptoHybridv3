@@ -51,13 +51,9 @@ port(
     gbt_rxready_i : in std_logic_vector (MXREADY-1 downto 0);
 
     -- START: Station Specific Ports DO NOT EDIT --
-
-    ext_sbits_o : out  std_logic_vector (7 downto 0);
-
-    ext_reset_o : out  std_logic_vector (MXRESET-1 downto 0);
-
-    adc_vp      : in   std_logic;
-    adc_vn      : in   std_logic;
+    master_slave   : in     std_logic;
+    master_slave_p : inout  std_logic_vector (5 downto 0);
+    master_slave_n : inout  std_logic_vector (5 downto 0);
     -- END: Station Specific Ports DO NOT EDIT --
 
     --== LEDs ==--
@@ -161,7 +157,11 @@ architecture Behavioral of optohybrid_top is
     signal ext_reset : std_logic_vector (11 downto 0);
 
     -- START: Station Specific Signals DO NOT EDIT --
-
+    -- dummy signals for ge21
+    signal ext_reset_o : std_logic_vector (11 downto 0);
+    signal ext_sbits_o : std_logic_vector (7 downto 0);
+    signal adc_vp      : std_logic;
+    signal adc_vn      : std_logic;
     -- END: Station Specific Signals DO NOT EDIT --
 
 begin
@@ -182,11 +182,10 @@ begin
     gbt_txready   <= gbt_txready_i;
 
     -- START: Station Specific IO DO NOT EDIT --
-    --===========--
-    --== GE11  ==--
-    --===========--
-    ext_reset_o  <= ctrl_reset_vfats;
-    ext_sbits_o  <= ext_sbits;
+    --=============--
+    --== GE21 v2 ==--
+    --=============--
+    vtrx_mabs    <= (others => '0');
     -- END: Station Specific IO DO NOT EDIT --
 
     --==============--

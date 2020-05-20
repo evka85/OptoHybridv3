@@ -34,12 +34,23 @@ def write_oh_ports (file_handle):
     padding = "    " #spaces for indentation
 
     if (gem_version=="ge21"):
-        f.write ('%sgbt_txvalid_o  : out    std_logic_vector (MXREADY-1 downto 0);\n'             %  (padding))
-        f.write ('\n');
+        master_slave_cnt = 6
+        if (oh_version == "v1"):
+            f.write ('%sgbt_txvalid_o  : out    std_logic_vector (MXREADY-1 downto 0);\n'             %  (padding))
+            f.write ('%svtrx_mabs_i    : in    std_logic_vector (1 downto 0);\n'                      %  (padding))
+            f.write ('\n');
+            master_slave_cnt = 12
+        elif (oh_version == "v2"):
+#            f.write ('%selink_trig_o_p  : out    std_logic_vector (10 downto 0);\n'                   %  (padding))
+#            f.write ('%selink_trig_o_n  : out    std_logic_vector (10 downto 0);\n'                   %  (padding))
+            pass
+        else:
+            print "invalid GE2/1 OH version"
+            return sys.exit(1)
+
         f.write ('%smaster_slave   : in     std_logic;\n'                                         %  (padding))
-        f.write ('%smaster_slave_p : inout  std_logic_vector (11 downto 0);\n'                    %  (padding))
-        f.write ('%smaster_slave_n : inout  std_logic_vector (11 downto 0);\n'                    %  (padding))
-        f.write ('%svtrx_mabs_i    : in    std_logic_vector (1 downto 0);\n'                      %  (padding))
+        f.write ('%smaster_slave_p : inout  std_logic_vector (%d downto 0);\n'                    %  (padding, master_slave_cnt - 1))
+        f.write ('%smaster_slave_n : inout  std_logic_vector (%d downto 0);\n'                    %  (padding, master_slave_cnt - 1))
     elif (gem_version=="ge11"):
 #       f.write ('%ssca_io      : in   std_logic_vector (3 downto 0); -- set as input for now\n'  %  (padding))
 #       f.write ('%ssca_ctl     : in   std_logic_vector (2 downto 0);\n'                          %  (padding))
@@ -87,12 +98,23 @@ def write_oh_io (file_handle):
     padding = "    " #spaces for indentation
 
     if (gem_version=="ge21"):
-        f.write('%s--===========--\n' % padding)
-        f.write('%s--== GE21  ==--\n' % padding)
-        f.write('%s--===========--\n' % padding)
+        if (oh_version=="v1"):
+            f.write('%s--=============--\n' % padding)
+            f.write('%s--== GE21 v1 ==--\n' % padding)
+            f.write('%s--=============--\n' % padding)
 
-        f.write('%sgbt_txvalid_o <= "11";\n' % padding)
-        f.write('%svtrx_mabs    <= vtrx_mabs_i;\n' % padding)
+            f.write('%sgbt_txvalid_o <= "11";\n' % padding)
+            f.write('%svtrx_mabs    <= vtrx_mabs_i;\n' % padding)
+        elif (oh_version == "v2"):
+            f.write('%s--=============--\n' % padding)
+            f.write('%s--== GE21 v2 ==--\n' % padding)
+            f.write('%s--=============--\n' % padding)
+
+            f.write("%svtrx_mabs    <= (others => '0');\n" % padding)
+        else:
+            print "invalid GE2/1 OH version"
+            return sys.exit(1)
+            
     elif (gem_version=="ge11"):
         f.write('%s--===========--\n' % padding)
         f.write('%s--== GE11  ==--\n' % padding)

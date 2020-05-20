@@ -13,9 +13,7 @@ set_property IOSTANDARD LVDS_25 [get_ports elink_i_p]
 set_property IOSTANDARD LVDS_25 [get_ports elink_i_n]
 set_property IOSTANDARD LVDS_25 [get_ports elink_o_p]
 set_property IOSTANDARD LVDS_25 [get_ports elink_o_n]
-
-set_property IOSTANDARD LVCMOS25 [get_ports {vtrx_mabs_i[0]}]
-set_property IOSTANDARD LVCMOS25 [get_ports {vtrx_mabs_i[1]}]
+set_property IOSTANDARD LVDS_25 [get_ports elink_trig_o_*]
 
 #set_property    IOSTANDARD    LVDS_25    [get_ports TP8]
 #set_property    IOSTANDARD    LVDS_25    [get_ports TP9]
@@ -30,6 +28,4 @@ set_property IOSTANDARD LVCMOS25 [get_ports {gbt_rxvalid_i[1]}]
 set_property IOSTANDARD LVCMOS25 [get_ports {gbt_rxvalid_i[0]}]
 set_property IOSTANDARD LVCMOS25 [get_ports {gbt_txready_i[1]}]
 set_property IOSTANDARD LVCMOS25 [get_ports {gbt_txready_i[0]}]
-set_property IOSTANDARD LVCMOS25 [get_ports {gbt_txvalid_o[1]}]
-set_property IOSTANDARD LVCMOS25 [get_ports {gbt_txvalid_o[0]}]
 
